@@ -16,7 +16,6 @@ mean_area = st.number_input("Mean area(area of nuclei): ")
 data = load_breast_cancer()
 X = data.data
 y = data.target
-result_placeholder = st.empty()
 
 def predict():
     input_values = [[mean_radius, mean_texture, mean_perimeter, mean_area] + [0] * (X.shape[1] - 4)]
@@ -24,10 +23,11 @@ def predict():
     model.fit(X, y)
     ans = model.predict(input_values)
     if ans == 1:
-        result_placeholder.success("You are benign")
+        st.success("You are benign")
     else:
-        result_placeholder.error("You have breast cancer")
+        st.error("You have breast cancer")
 st.header("Prediction result")
 st.button("click here to predict",on_click = predict)
+
 
 
